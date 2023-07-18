@@ -1,14 +1,15 @@
-<h2>C# Collections Overview</h2>
+h2. C# Collections Overview
 
-<p>In C#, collections are used to store and organize multiple elements in a single data structure. There are several types of collections available, both generic and non-generic. Each type has its own use case and performance characteristics. Here, we'll cover the most common types of collections with examples and comments.</p>
+In C#, collections are used to store and organize multiple elements in a single data structure. There are several types of collections available, both generic and non-generic. Each type has its own use case and performance characteristics. Here, we'll cover the most common types of collections with examples and comments.
 
-<h3>Non-Generic Collections</h3>
+h3. Non-Generic Collections
 
-<h4>1. ArrayList</h4>
+h4. 1. ArrayList
 
-<p>The <code>ArrayList</code> is a non-generic collection that can store elements of any type.</p>
+The {code}ArrayList{code} is a non-generic collection that can store elements of any type.
 
-<pre><code>// Create an ArrayList
+{code:csharp}
+// Create an ArrayList
 ArrayList arrayList = new ArrayList();
 
 // Add elements
@@ -24,15 +25,16 @@ foreach (var item in arrayList)
 {
     Console.WriteLine(item);
 }
-</code></pre>
+{code}
 
-<p>Use <code>ArrayList</code> when you need to store elements of different data types, but be cautious about boxing and unboxing operations, which can impact performance.</p>
+Use {code}ArrayList{code} when you need to store elements of different data types, but be cautious about boxing and unboxing operations, which can impact performance.
 
-<h4>2. Hashtable</h4>
+h4. 2. Hashtable
 
-<p>The <code>Hashtable</code> stores key-value pairs, and keys and values can be of any type.</p>
+The {code}Hashtable{code} stores key-value pairs, and keys and values can be of any type.
 
-<pre><code>// Create a Hashtable
+{code:csharp}
+// Create a Hashtable
 Hashtable hashtable = new Hashtable();
 
 // Add key-value pairs
@@ -55,15 +57,16 @@ while (enumerator.MoveNext())
 {
     Console.WriteLine(enumerator.Key + ": " + enumerator.Value);
 }
-</code></pre>
+{code}
 
-<p>Use <code>Hashtable</code> when you need to map keys to values, and the key-value pairs can be of different data types.</p>
+Use {code}Hashtable{code} when you need to map keys to values, and the key-value pairs can be of different data types.
 
-<h4>3. Stack</h4>
+h4. 3. Stack
 
-<p>The <code>Stack</code> represents a last-in-first-out (LIFO) collection of objects.</p>
+The {code}Stack{code} represents a last-in-first-out (LIFO) collection of objects.
 
-<pre><code>// Create a Stack
+{code:csharp}
+// Create a Stack
 Stack stack = new Stack();
 
 // Push elements
@@ -82,15 +85,16 @@ foreach (var item in stack)
 {
     Console.WriteLine(item);
 }
-</code></pre>
+{code}
 
-<p>Use <code>Stack</code> when you need to manage elements in a last-in-first-out order, such as handling function calls or evaluating expressions.</p>
+Use {code}Stack{code} when you need to manage elements in a last-in-first-out order, such as handling function calls or evaluating expressions.
 
-<h4>4. Queue</h4>
+h4. 4. Queue
 
-<p>The <code>Queue</code> represents a first-in-first-out (FIFO) collection of objects.</p>
+The {code}Queue{code} represents a first-in-first-out (FIFO) collection of objects.
 
-<pre><code>// Create a Queue
+{code:csharp}
+// Create a Queue
 Queue queue = new Queue();
 
 // Enqueue elements
@@ -109,18 +113,19 @@ while (queue.Count > 0)
 {
     Console.WriteLine(queue.Dequeue());
 }
-</code></pre>
+{code}
 
-<p>Use <code>Queue</code> when you need to manage elements in a first-in-first-out order, such as handling task scheduling or processing requests.</p>
+Use {code}Queue{code} when you need to manage elements in a first-in-first-out order, such as handling task scheduling or processing requests.
 
-<h3>Generic Collections</h3>
+h3. Generic Collections
 
-<h4>1. List&lt;T&gt;</h4>
+h4. 1. List<T>
 
-<p>The <code>List&lt;T&gt;</code> is a generic collection that stores elements of a specific type <code>T</code>.</p>
+The {code}List<T>{code} is a generic collection that stores elements of a specific type {code}T{code}.
 
-<pre><code>// Create a List of strings
-List&lt;string&gt; stringList = new List&lt;string&gt;();
+{code:csharp}
+// Create a List of strings
+List<string> stringList = new List<string>();
 
 // Add elements
 stringList.Add("Apple");
@@ -131,20 +136,21 @@ stringList.Add("Orange");
 stringList.Remove("Banana");
 
 // Iterate using for loop
-for (int i = 0; i &lt; stringList.Count; i++)
+for (int i = 0; i < stringList.Count; i++)
 {
     Console.WriteLine(stringList[i]);
 }
-</code></pre>
+{code}
 
-<p>Use <code>List&lt;T&gt;</code> when you need a dynamic list that allows adding, removing, and iterating over elements efficiently.</p>
+Use {code}List<T>{code} when you need a dynamic list that allows adding, removing, and iterating over elements efficiently.
 
-<h4>2. Dictionary&lt;TKey, TValue&gt;</h4>
+h4. 2. Dictionary<TKey, TValue>
 
-<p>The <code>Dictionary&lt;TKey, TValue&gt;</code> stores key-value pairs, where keys and values have specific types.</p>
+The {code}Dictionary<TKey, TValue>{code} stores key-value pairs, where keys and values have specific types.
 
-<pre><code>// Create a Dictionary with string keys and int values
-Dictionary&lt;string, int&gt; ageDictionary = new Dictionary&lt;string, int&gt;();
+{code:csharp}
+// Create a Dictionary with string keys and int values
+Dictionary<string, int> ageDictionary = new Dictionary<string, int>();
 
 // Add key-value pairs
 ageDictionary.Add("John", 30);
@@ -160,31 +166,32 @@ if (ageDictionary.TryGetValue("John", out int johnAge))
     Console.WriteLine("John's Age: " + johnAge);
 }
 
-// Iterate using foreach on KeyValuePair&lt;TKey, TValue&gt;
+// Iterate using foreach on KeyValuePair<TKey, TValue>
 foreach (var kvp in ageDictionary)
 {
     Console.WriteLine(kvp.Key + ": " + kvp.Value);
 }
-</code></pre>
+{code}
 
-<p>Use <code>Dictionary&lt;TKey, TValue&gt;</code> when you need to associate values with unique keys for quick access and retrieval.</p>
+Use {code}Dictionary<TKey, TValue>{code} when you need to associate values with unique keys for quick access and retrieval.
 
-<h3>Concurrent Collections</h3>
+h3. Concurrent Collections
 
-<p>C# also provides concurrent collections that are thread-safe for multi-threaded scenarios.</p>
+C# also provides concurrent collections that are thread-safe for multi-threaded scenarios.
 
-<h4>1. ConcurrentBag&lt;T&gt;</h4>
+h4. 1. ConcurrentBag<T>
 
-<p>The <code>ConcurrentBag&lt;T&gt;</code> is a thread-safe collection that allows multiple threads to add and remove elements without explicit locking.</p>
+The {code}ConcurrentBag<T>{code} is a thread-safe collection that allows multiple threads to add and remove elements without explicit locking.
 
-<pre><code>// Create a ConcurrentBag of integers
-ConcurrentBag&lt;int&gt; intBag = new ConcurrentBag&lt;int&gt;();
+{code:csharp}
+// Create a ConcurrentBag of integers
+ConcurrentBag<int> intBag = new ConcurrentBag<int>();
 
 // Add elements from different threads
-Parallel.For(0, 10, (i) =&gt; intBag.Add(i));
+Parallel.For(0, 10, (i) => intBag.Add(i));
 
 // Remove elements from different threads
-Parallel.ForEach(intBag, (item) =&gt;
+Parallel.ForEach(intBag, (item) =>
 {
     if (item % 2 == 0)
     {
@@ -197,21 +204,40 @@ foreach (var item in intBag)
 {
     Console.WriteLine(item);
 }
-</code></pre>
+{code}
 
-<p>Use <code>ConcurrentBag&lt;T&gt;</code> when you have multiple threads concurrently adding or removing items from the collection.</p>
+Use {code}ConcurrentBag<T>{code} when you have multiple threads concurrently adding or removing items from the collection.
 
-<h4>2. ConcurrentDictionary&lt;TKey, TValue&gt;</h4>
+h4. 2. ConcurrentDictionary<TKey, TValue>
 
-<p>The <code>ConcurrentDictionary&lt;TKey, TValue&gt;</code> is a thread-safe dictionary that allows multiple threads to access and modify elements concurrently.</p>
+The {code}ConcurrentDictionary<TKey, TValue>{code} is a thread-safe dictionary that allows multiple threads to access and modify elements concurrently.
 
-<pre><code>// Create a ConcurrentDictionary with string keys and int values
-ConcurrentDictionary&lt;string, int&gt; concurrentAgeDictionary = new ConcurrentDictionary&lt;string, int&gt;();
+{code:csharp}
+// Create a ConcurrentDictionary with string keys and int values
+ConcurrentDictionary<string, int> concurrentAgeDictionary = new ConcurrentDictionary<string, int>();
 
 // Add key-value pairs from different threads
-Parallel.For(0, 10, (i) =&gt;
+Parallel.For(0, 10, (i) =>
 {
     concurrentAgeDictionary.TryAdd("Person " + i, i * 5);
 });
 
-// Remove a key
+// Remove a key-value pair from different threads
+Parallel.ForEach(concurrentAgeDictionary, (kvp) =>
+{
+    if (kvp.Value % 2 == 0)
+    {
+        concurrentAgeDictionary.TryRemove(kvp.Key, out _);
+    }
+});
+
+// Iterate using foreach (may not be in a specific order)
+foreach (var kvp in concurrentAgeDictionary)
+{
+    Console.WriteLine(kvp.Key + ": " + kvp.Value);
+}
+{code}
+
+Use {code}ConcurrentDictionary<TKey, TValue>{code} when you have multiple threads concurrently modifying a dictionary.
+
+h
