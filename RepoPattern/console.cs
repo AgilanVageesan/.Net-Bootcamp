@@ -194,4 +194,50 @@ namespace BankingConsoleApp
                 if (account != null)
                 {
                     Console.WriteLine($"Account ID: {account.Id}, Account Number: {account.AccountNumber}, " +
-                                      $"Account Holder Name: {account.AccountHolderName},
+                                      $"Account Holder Name: {account.AccountHolderName}, Balance: {account.Balance}, " +
+                                      $"Is Active: {account.IsActive}, Account Type: {account.AccountType}");
+
+                    Console.Write("Enter new Account Holder Name: ");
+                    string newAccountHolderName = Console.ReadLine();
+
+                    // Update the account holder name.
+                    account.AccountHolderName = newAccountHolderName;
+                    bankingService.UpdateAccount(account);
+
+                    Console.WriteLine("Bank account updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Bank account not found with the specified ID.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        static void CloseBankAccount(IBankingService bankingService)
+        {
+            Console.Write("Enter the Account ID to close: ");
+            string accountIdStr = Console.ReadLine();
+
+            if (int.TryParse(accountIdStr, out int accountId))
+            {
+                try
+                {
+                    bankingService.CloseAccount(accountId);
+                    Console.WriteLine("Bank account closed successfully.");
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+}
