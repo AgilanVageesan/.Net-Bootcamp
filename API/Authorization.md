@@ -90,3 +90,58 @@ public class AuthenticationService
 In this example, we have a service called `AuthenticationService`, which handles user authentication and token generation. The `AuthenticateAndGetJwtToken` method takes the bank account number and password as input and verifies them against the user database using ASP.NET Core Identity. If the credentials are correct, the method generates a JWT token containing the user's bank account number as a claim.
 
 Please note that this is just a simplified example, and in a real-world application, you may need to handle additional aspects, such as token refresh, token revocation, and more robust error handling. Also, ensure that the `tokenKey` value is securely stored and never exposed to unauthorized users.
+
+To use the `AuthenticationService` in the `BankAccountController`, you first need to inject it into the controller using dependency injection. Then, you can call the methods of the `AuthenticationService` to authenticate users and generate JWT tokens based on their bank account numbers and passwords.
+
+Here's how you can use the `AuthenticationService` in the `BankAccountController`:
+
+1. First, inject the `AuthenticationService` into the `BankAccountController`:
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+[ApiController]
+[Route("api/banking")]
+public class BankAccountController : ControllerBase
+{
+    private readonly IBankingService _bankingService;
+    private readonly AuthenticationService _authenticationService;
+
+    public BankAccountController(IBankingService bankingService, AuthenticationService authenticationService)
+    {
+        _bankingService = bankingService;
+        _authenticationService = authenticationService;
+    }
+
+    // Your action methods here...
+}
+```
+
+2. Now, you can use the `_authenticationService` in any of the action methods to authenticate users and generate JWT tokens based on their bank account numbers and passwords:
+
+```csharp
+[HttpPost("login")]
+public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+{
+    try
+    {
+        // Authenticate user using the bank account number and password
+        var token = await _authenticationService.AuthenticateAndGetJwtToken(loginViewModel.BankAccountNumber, loginViewModel.Password);
+
+        // If authentication is successful, return the JWT token
+        return Ok(new { Token = token });
+    }
+    catch (AuthenticationException ex)
+    {
+        // If authentication fails, return an error message
+        return BadRequest(new { Message = ex.Message });
+    }
+}
+```
+
+In this example, the `Login` action method takes a `LoginViewModel` as input, which contains the user's bank account number and password. It then calls the `AuthenticateAndGetJwtToken` method of the `AuthenticationService` to authenticate the user and generate a JWT token. If authentication is successful, the method returns the token as part of the response.
+
+Make sure to replace `LoginViewModel` with the actual view model class that holds the bank account number and password fields in your application.
+
+By using the `AuthenticationService` in the `BankAccountController`, you can securely authenticate users and issue JWT tokens for subsequent API requests. Remember to add appropriate error handling and validation to handle different scenarios, such as incorrect credentials or missing input fields.
